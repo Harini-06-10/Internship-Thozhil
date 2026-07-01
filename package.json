@@ -10,9 +10,6 @@
     "build": "node -e \"console.log('No build step required')\""
   },
   "engines": {
-    "node": "20.x"
-  },
-  "engines": {
     "node": "24.x"
   },
   "dependencies": {
