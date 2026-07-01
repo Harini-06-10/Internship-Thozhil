@@ -2,7 +2,9 @@
 const Database = require('better-sqlite3')
 const path = require('path')
 
-const dbPath = path.join(__dirname, 'app.db')
+const dbPath = process.env.VERCEL
+  ? path.join('/tmp', 'app.db')
+  : path.join(__dirname, 'app.db')
 const db = new Database(dbPath)
 
 db.exec(`
