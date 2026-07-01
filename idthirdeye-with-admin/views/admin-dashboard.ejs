@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard — idThirdeye</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/css/admin.css">
+</head>
+<body class="admin-body">
+
+<!-- ===== ADMIN HEADER ===== -->
+<header class="admin-header">
+  <div class="admin-header__inner">
+    <div class="admin-header__brand">
+      <svg viewBox="0 0 40 40" width="22" height="22">
+        <path d="M2 20 Q20 4 38 20 Q20 36 2 20 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+        <circle cx="20" cy="20" r="6" fill="currentColor"/>
+      </svg>
+      <span>idThirdeye</span>
+      <span class="admin-badge">ADMIN PANEL</span>
+    </div>
+    <div class="admin-header__right">
+      <span class="admin-logged-as mono">Logged in as <%= adminEmail %></span>
+      <form method="POST" action="/admin/logout" style="margin:0">
+        <button type="submit" class="logout-btn">Log out</button>
+      </form>
+    </div>
+  </div>
+</header>
+
+<!-- ===== MAIN ===== -->
+<main class="admin-main">
+
+  <!-- Breadcrumb -->
+  <div class="admin-breadcrumb">
+    <span class="mono">ADMIN</span>
+    <span class="mono">/</span>
+    <span class="mono">REGISTERED USERS</span>
+  </div>
+
+  <!-- Stats row -->
+  <div class="admin-stats">
+    <div class="admin-stat-card">
+      <span class="admin-stat-num mono"><%= totalCount %></span>
+      <span class="admin-stat-label">Total registered users</span>
+    </div>
+    <div class="admin-stat-card">
+      <span class="admin-stat-num mono">SQLite</span>
+      <span class="admin-stat-label">Database: app.db</span>
+    </div>
+    <div class="admin-stat-card">
+      <span class="admin-stat-num mono">bcrypt</span>
+      <span class="admin-stat-label">Password hashing</span>
+    </div>
+  </div>
+
+  <% if (success) { %>
+    <div class="admin-success"><%= success %></div>
+  <% } %>
+
+  <!-- Users table -->
+  <div class="admin-table-wrap">
+    <div class="admin-table-head">
+      <h2>Registered Users</h2>
+      <span class="mono admin-table-count"><%= totalCount %> record<%= totalCount !== 1 ? 's' : '' %></span>
+    </div>
+
+    <% if (users.length === 0) { %>
+      <div class="admin-empty">
+        <p>No users registered yet. Go to <a href="/register">/register</a> to create one.</p>
+      </div>
+    <% } else { %>
+      <div class="admin-table-scroll">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th class="mono">ID</th>
+              <th class="mono">FULL NAME</th>
+              <th class="mono">EMAIL</th>
+              <th class="mono">PASSWORD</th>
+              <th class="mono">JOINED</th>
+              <th class="mono">ACTION</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% users.forEach(function(user) { %>
+              <tr>
+                <td class="mono cell-id">#<%= user.id %></td>
+                <td class="cell-name"><%= user.full_name %></td>
+                <td class="mono cell-email"><%= user.email %></td>
+                <td class="mono cell-hash">
+                  <span class="hash-preview" title="Hashed with bcrypt — not the real password">
+                    ●●●●●●●● (bcrypt hashed)
+                  </span>
+                </td>
+                <td class="mono cell-date">
+                  <%= new Date(user.created_at).toLocaleString('en-IN', {
+                    year: 'numeric', month: 'short', day: 'numeric',
+                    hour: '2-digit', minute: '2-digit'
+                  }) %>
+                </td>
+                <td class="cell-action">
+                  <form method="POST" action="/admin/delete/<%= user.id %>"
+                        onsubmit="return confirm('Delete <%= user.full_name %>? This cannot be undone.')">
+                    <button type="submit" class="btn-delete">Delete</button>
+                  </form>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </div>
+
+  <!-- Info box -->
+  <div class="admin-info-box">
+    <h4>How this works</h4>
+    <p>
+      Every row above is a user who registered through <code>/register</code>.
+      Passwords are never stored in plain text — bcrypt converts them into a
+      one-way hash before saving to the SQLite database (<code>db/app.db</code>).
+      Even the admin cannot read a user's original password from this panel.
+    </p>
+  </div>
+
+</main>
+
+</body>
+</html>

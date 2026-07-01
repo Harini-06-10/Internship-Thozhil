@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>idThirdeye Technology Solutions | See What Others Miss</title>
+<meta name="description" content="idThirdeye Technology Solutions — IT infrastructure, cybersecurity, AI &amp; Generative AI, and corporate training, based in Chennai.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/idthirdeye.css">
+</head>
+<body>
+
+<div class="scan-overlay" id="scanOverlay" aria-hidden="true">
+  <div class="scan-line"></div>
+</div>
+
+<header class="site-header" id="siteHeader">
+  <div class="nav-wrap">
+    <a href="#top" class="brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 40 40" width="28" height="28">
+          <path d="M2 20 Q20 4 38 20 Q20 36 2 20 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+          <circle cx="20" cy="20" r="6" fill="currentColor"/>
+        </svg>
+      </span>
+      <span class="brand-text">idThirdeye<span class="brand-sub">Technology Solutions</span></span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#services">Services</a>
+      <a href="#approach">Approach</a>
+      <a href="#work">Work</a>
+      <a href="#training">Training</a>
+      <a href="#about">About</a>
+    </nav>
+    <div class="nav-user">
+      <a href="/dashboard" class="nav-user__name"><%= user.full_name.split(' ')[0] %></a>
+      <form method="POST" action="/logout" style="margin:0">
+        <button type="submit" class="nav-user__logout">Log out</button>
+      </form>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero" id="hero">
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <p class="eyebrow mono">CHENNAI &mdash; IT INFRASTRUCTURE &amp; CYBERSECURITY &amp; APPLIED AI</p>
+      <h1 class="hero-title">
+        We notice the risk<br>
+        <span class="accent-text">before it notices you.</span>
+      </h1>
+      <p class="hero-sub">
+        idThirdeye Technology Solutions partners with enterprises to secure their
+        infrastructure, deploy applied AI, and train the people who run it all &mdash;
+        with the quiet discipline of a team that watches for what gets missed.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">Talk to our team</a>
+        <a href="#services" class="btn btn-ghost">See what we do</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num mono">24/7</span>
+          <span class="stat-label">Infrastructure &amp; security monitoring</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num mono">15+</span>
+          <span class="stat-label">Industry sectors served</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num mono">100%</span>
+          <span class="stat-label">Engagements with a named lead</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-eye" aria-hidden="true">
+      <svg viewBox="0 0 400 400" width="100%" height="100%">
+        <defs>
+          <radialGradient id="irisGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#3FD0C9" stop-opacity="0.9"/>
+            <stop offset="65%" stop-color="#1C7D78" stop-opacity="0.5"/>
+            <stop offset="100%" stop-color="#0B1320" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle cx="200" cy="200" r="190" fill="none" stroke="#1E2A3D" stroke-width="1"/>
+        <circle cx="200" cy="200" r="150" fill="none" stroke="#1E2A3D" stroke-width="1"/>
+        <g class="eye-sweep">
+          <path d="M200 200 L200 10 A190 190 0 0 1 363 110 Z" fill="url(#irisGrad)"/>
+        </g>
+        <circle cx="200" cy="200" r="60" fill="#0B1320" stroke="#3FD0C9" stroke-width="1.5"/>
+        <circle cx="200" cy="200" r="26" fill="#3FD0C9" class="eye-pupil"/>
+      </svg>
+    </div>
+  </section>
+
+  <section class="trust-strip">
+    <p class="mono trust-label">WORKING ACROSS</p>
+    <div class="trust-items">
+      <span>Banking &amp; Financial Services</span>
+      <span>Manufacturing</span>
+      <span>Healthcare</span>
+      <span>Public Sector</span>
+      <span>Logistics</span>
+      <span>Retail &amp; Telecom</span>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="section-head">
+      <p class="eyebrow mono">WHAT WE DO</p>
+      <h2>Four disciplines.<br>One vantage point.</h2>
+      <p class="section-lede">
+        Every engagement starts the same way &mdash; by looking closely at what's
+        actually happening in your systems, not what the dashboard says is happening.
+        From there, we build, secure, and teach.
+      </p>
+    </div>
+
+    <div class="service-grid">
+      <article class="service-card">
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.6">
+            <rect x="6" y="8" width="36" height="24" rx="2"/>
+            <path d="M16 38h16M24 32v6"/>
+            <path d="M12 16h10M12 21h6"/>
+          </svg>
+        </div>
+        <h3>IT Infrastructure Management</h3>
+        <p>Cloud and on-premise environments, networking, and managed support designed to stay invisible &mdash; until you need to look at the data.</p>
+        <ul class="service-points">
+          <li>Cloud migration &amp; hybrid architecture</li>
+          <li>Network design &amp; managed support</li>
+          <li>24/7 monitoring &amp; incident response</li>
+        </ul>
+      </article>
+
+      <article class="service-card">
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M24 5 9 11v12c0 11 8 16.5 15 20 7-3.5 15-9 15-20V11L24 5Z"/>
+            <path d="M18 24l4.5 4.5L31 18"/>
+          </svg>
+        </div>
+        <h3>Cybersecurity Defense</h3>
+        <p>Threat detection and response built with AI and Generative AI underneath &mdash; tuned to your traffic, not a generic baseline.</p>
+        <ul class="service-points">
+          <li>AI-augmented threat detection</li>
+          <li>Vulnerability assessment &amp; pen testing</li>
+          <li>Compliance &amp; security audits</li>
+        </ul>
+      </article>
+
+      <article class="service-card">
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.6">
+            <circle cx="24" cy="24" r="5"/>
+            <path d="M24 7v6M24 35v6M7 24h6M35 24h6M12.5 12.5l4.2 4.2M31.3 31.3l4.2 4.2M12.5 35.5l4.2-4.2M31.3 16.7l4.2-4.2"/>
+          </svg>
+        </div>
+        <h3>AI &amp; Generative AI Solutions</h3>
+        <p>Practical AI integration &mdash; forecasting, automation, and copilots built around a real workflow, not a demo.</p>
+        <ul class="service-points">
+          <li>Custom AI &amp; GenAI integration</li>
+          <li>Workflow automation</li>
+          <li>Data &amp; analytics pipelines</li>
+        </ul>
+      </article>
+
+      <article class="service-card">
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M24 6 8 14l16 8 16-8-16-8Z"/>
+            <path d="M14 19v10c0 4 5 7 10 7s10-3 10-7V19"/>
+          </svg>
+        </div>
+        <h3>Corporate Training</h3>
+        <p>Hands-on programs in cybersecurity, cloud, and Generative AI that leave teams able to run what we hand off.</p>
+        <ul class="service-points">
+          <li>Cybersecurity Defense with AI &amp; GenAI</li>
+          <li>Cloud &amp; infrastructure certification prep</li>
+          <li>Custom enterprise upskilling tracks</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="approach" id="approach">
+    <div class="approach-visual" aria-hidden="true">
+      <svg viewBox="0 0 300 300" width="100%" height="100%">
+        <circle cx="150" cy="150" r="140" fill="none" stroke="#1E2A3D" stroke-width="1" stroke-dasharray="2 6"/>
+        <circle cx="150" cy="150" r="100" fill="none" stroke="#1E2A3D" stroke-width="1"/>
+        <circle cx="150" cy="150" r="4" fill="#3FD0C9"/>
+        <g class="orbit-dot"><circle r="5" fill="#3FD0C9"/></g>
+      </svg>
+    </div>
+    <div class="approach-content">
+      <p class="eyebrow mono">HOW WE WORK</p>
+      <h2>Observe. Architect.<br>Defend. Hand off.</h2>
+      <ol class="approach-steps">
+        <li>
+          <span class="step-num mono">Observe</span>
+          <div>
+            <h4>We audit before we touch anything</h4>
+            <p>Infrastructure review, security posture, and a plain-language map of where the real risk sits &mdash; not a 40-page template.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-num mono">Architect</span>
+          <div>
+            <h4>We design for your constraints</h4>
+            <p>Budget, team size, and existing systems shape the plan. No rip-and-replace unless rip-and-replace is genuinely cheaper.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-num mono">Defend</span>
+          <div>
+            <h4>We build in monitoring from day one</h4>
+            <p>Security and observability are part of the build, not a phase-two upsell.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-num mono">Hand off</span>
+          <div>
+            <h4>We train your team to own it</h4>
+            <p>Every engagement closes with documentation and a training track so you're not dependent on us to keep running.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="work" id="work">
+    <div class="section-head">
+      <p class="eyebrow mono">RECENT WORK</p>
+      <h2>Selected engagements</h2>
+    </div>
+    <div class="work-grid">
+      <article class="work-card">
+        <p class="work-tag mono">FINANCIAL SERVICES</p>
+        <h3>Adaptive authentication rollout</h3>
+        <p>Helped a regional bank redesign customer authentication ahead of new multi-factor regulatory requirements &mdash; moving away from SMS OTP toward device binding and behavioral signals, with zero downtime during cutover.</p>
+      </article>
+      <article class="work-card">
+        <p class="work-tag mono">MANUFACTURING</p>
+        <h3>Predictive maintenance pilot</h3>
+        <p>Built a lightweight forecasting layer on top of existing sensor data to flag equipment likely to fail within two weeks, cutting unplanned downtime on the pilot line.</p>
+      </article>
+      <article class="work-card">
+        <p class="work-tag mono">PUBLIC SECTOR</p>
+        <h3>Cybersecurity &amp; AI training cohort</h3>
+        <p>Delivered a multi-week "Cybersecurity Defense with AI and Generative AI" program for a public-sector technical team, ending in certification and a live tabletop incident exercise.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="training" id="training">
+    <div class="training-card">
+      <p class="eyebrow mono">CORPORATE TRAINING</p>
+      <h2>Cybersecurity Defense with AI &amp; Generative AI</h2>
+      <p class="training-lede">
+        Our flagship program for technical teams who need to defend real infrastructure,
+        not pass a multiple-choice exam. Cohorts are small, hands-on, and end in a graded
+        incident-response simulation.
+      </p>
+      <div class="training-grid">
+        <div class="training-item">
+          <span class="mono training-num">06</span>
+          <span>Weeks, part-time</span>
+        </div>
+        <div class="training-item">
+          <span class="mono training-num">12</span>
+          <span>Learners per cohort</span>
+        </div>
+        <div class="training-item">
+          <span class="mono training-num">01</span>
+          <span>Live tabletop exercise</span>
+        </div>
+      </div>
+      <a href="#contact" class="btn btn-primary">Request the syllabus</a>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="section-head">
+      <p class="eyebrow mono">ABOUT US</p>
+      <h2>Built by engineers who'd rather find the problem than explain it away.</h2>
+    </div>
+    <div class="about-grid">
+      <p class="about-text">
+        idThirdeye Technology Solutions (iTTS) is a Chennai-based technology company
+        working across IT infrastructure, cybersecurity, applied AI, and enterprise
+        training. We work with banks, manufacturers, public-sector teams, and growing
+        businesses who need infrastructure that holds up under real load and a security
+        posture that's actually tested, not just documented.
+      </p>
+      <p class="about-text">
+        The name comes from a simple idea: most outages and breaches aren't surprises
+        &mdash; they're things a careful look would have caught earlier. That's the
+        lens we bring to every engagement, whether it's a six-week training cohort or
+        a year-long infrastructure overhaul.
+      </p>
+      <div class="about-values">
+        <div class="value-item">
+          <h4>Honesty over optics</h4>
+          <p>We'll tell you when a vendor's roadmap doesn't match your timeline.</p>
+        </div>
+        <div class="value-item">
+          <h4>Named accountability</h4>
+          <p>Every engagement has one lead you can actually reach.</p>
+        </div>
+        <div class="value-item">
+          <h4>Teach, don't gatekeep</h4>
+          <p>We measure success partly by how little you need us a year later.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="contact-inner">
+      <p class="eyebrow mono">GET IN TOUCH</p>
+      <h2>Tell us what you're seeing.<br>We'll tell you what we'd look at next.</h2>
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="form-row">
+          <label for="cf-name">Name
+            <input type="text" id="cf-name" name="name" required value="<%= user.full_name %>">
+          </label>
+          <label for="cf-email">Work email
+            <input type="email" id="cf-email" name="email" required value="<%= user.email %>">
+          </label>
+        </div>
+        <label for="cf-company">Company
+          <input type="text" id="cf-company" name="company">
+        </label>
+        <label for="cf-interest">What do you need help with?
+          <select id="cf-interest" name="interest">
+            <option value="infrastructure">IT Infrastructure Management</option>
+            <option value="security">Cybersecurity Defense</option>
+            <option value="ai">AI &amp; Generative AI Solutions</option>
+            <option value="training">Corporate Training</option>
+            <option value="other">Something else</option>
+          </select>
+        </label>
+        <label for="cf-message">A few details
+          <textarea id="cf-message" name="message" rows="4" placeholder="What's the system, what's the symptom, what's the timeline?"></textarea>
+        </label>
+        <button type="submit" class="btn btn-primary form-submit">Send message</button>
+        <p class="form-status mono" id="formStatus" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 40 40" width="22" height="22">
+          <path d="M2 20 Q20 4 38 20 Q20 36 2 20 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+          <circle cx="20" cy="20" r="6" fill="currentColor"/>
+        </svg>
+      </span>
+      <span>idThirdeye Technology Solutions</span>
+    </div>
+    <nav class="footer-links">
+      <a href="#services">Services</a>
+      <a href="#approach">Approach</a>
+      <a href="#work">Work</a>
+      <a href="#training">Training</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <p class="footer-meta mono">Chennai, Tamil Nadu &middot; Student capstone project &middot; logged in as <%= user.email %></p>
+  </div>
+</footer>
+
+<script src="/js/idthirdeye.js"></script>
+</body>
+</html>

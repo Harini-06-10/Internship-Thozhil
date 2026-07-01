@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login — idThirdeye</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="auth-brand">
+      <svg viewBox="0 0 40 40" width="26" height="26">
+        <path d="M2 20 Q20 4 38 20 Q20 36 2 20 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+        <circle cx="20" cy="20" r="6" fill="currentColor"/>
+      </svg>
+      <span>idThirdeye <span class="admin-badge">ADMIN</span></span>
+    </div>
+
+    <h1>Admin Access</h1>
+    <p class="auth-sub">This panel is restricted to administrators only.</p>
+
+    <% if (error) { %>
+      <div class="auth-error"><%= error %></div>
+    <% } %>
+
+    <form method="POST" action="/admin/login" novalidate>
+      <div class="field">
+        <label for="email">Admin Email</label>
+        <input type="email" id="email" name="email"
+               value="<%= oldInput.email || '' %>"
+               autocomplete="off" required>
+      </div>
+      <div class="field">
+        <label for="password">Admin Password</label>
+        <input type="password" id="password" name="password"
+               autocomplete="off" required>
+      </div>
+      <button type="submit" class="btn btn-admin">Access Admin Panel</button>
+    </form>
+
+    <p class="auth-switch">
+      <a href="/login">&larr; Back to user login</a>
+    </p>
+  </div>
+</div>
+
+</body>
+</html>
