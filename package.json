@@ -10,7 +10,7 @@
     "build": "node -e \"console.log('No build step required')\""
   },
   "engines": {
-    "node": "18.x"
+    "node": "26.x"
   },
   "dependencies": {
     "express": "^4.19.2",
