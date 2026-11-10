@@ -1,105 +1,134 @@
-// db/database.js
-const Database = require('better-sqlite3')
-const path = require('path')
 
-const dbPath = process.env.VERCEL
-  ? path.join('/tmp', 'app.db')
-  : path.join(__dirname, 'app.db')
-const db = new Database(dbPath)
+const mongoose = require('mongoose')
+const User = require('./User')
+const ContactMessage = require('./ContactMessage')
 
-db.exec(`
-  CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    full_name TEXT NOT NULL,
-    email TEXT NOT NULL UNIQUE,
-    password_hash TEXT NOT NULL,
-    created_at TEXT NOT NULL DEFAULT (datetime('now'))
-  )
-`)
+// Format user data for the application
+function formatUser(user) {
+  if (!user) return null
 
-db.exec(`
-  CREATE TABLE IF NOT EXISTS contact_messages (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id INTEGER,
-    name TEXT,
-    email TEXT,
-    company TEXT,
-    interest TEXT,
-    message TEXT NOT NULL,
-    created_at TEXT NOT NULL DEFAULT (datetime('now')),
-    FOREIGN KEY(user_id) REFERENCES users(id)
-  )
-`)
-
-function createUser({ fullName, email, passwordHash }) {
-  const stmt = db.prepare(
-    'INSERT INTO users (full_name, email, password_hash) VALUES (?, ?, ?)'
-  )
-  const info = stmt.run(fullName, email.toLowerCase(), passwordHash)
-  return getUserById(info.lastInsertRowid)
+  return {
+    id: user._id.toString(),
+    full_name: user.full_name,
+    email: user.email,
+    password_hash: user.password_hash,
+    created_at: user.created_at
+  }
 }
 
-function getUserByEmail(email) {
-  const stmt = db.prepare('SELECT * FROM users WHERE email = ?')
-  return stmt.get(email.toLowerCase())
+// Format contact message data
+function formatMessage(msg) {
+  if (!msg) return null
+
+  return {
+    id: msg._id.toString(),
+    user_id: msg.user_id,
+    name: msg.name,
+    email: msg.email,
+    company: msg.company,
+    interest: msg.interest,
+    message: msg.message,
+    created_at: msg.created_at
+  }
 }
 
-function getUserById(id) {
-  const stmt = db.prepare('SELECT id, full_name, email, created_at FROM users WHERE id = ?')
-  return stmt.get(id)
+// USER FUNCTIONS
+
+async function createUser({ fullName, email, passwordHash }) {
+  const user = await User.create({
+    full_name: fullName,
+    email: email.toLowerCase().trim(),
+    password_hash: passwordHash
+  })
+
+  return formatUser(user)
 }
 
-function getAllUsers() {
-  const stmt = db.prepare(
-    'SELECT id, full_name, email, created_at FROM users ORDER BY created_at DESC'
-  )
-  return stmt.all()
+async function getUserByEmail(email) {
+  const user = await User.findOne({
+    email: email.toLowerCase().trim()
+  })
+
+  return formatUser(user)
 }
 
-function getTotalUserCount() {
-  const stmt = db.prepare('SELECT COUNT(*) as count FROM users')
-  return stmt.get().count
+async function getUserById(id) {
+  if (!mongoose.isValidObjectId(id)) return null
+
+  const user = await User.findById(id)
+  return formatUser(user)
 }
 
-function deleteUser(id) {
-  const stmt = db.prepare('DELETE FROM users WHERE id = ?')
-  return stmt.run(id)
+async function getAllUsers() {
+  const users = await User.find()
+    .sort({ created_at: -1 })
+    .select('-password_hash')
+
+  return users.map(user => ({
+    id: user._id.toString(),
+    full_name: user.full_name,
+    email: user.email,
+    created_at: user.created_at
+  }))
 }
 
-function createContactMessage({ userId, name, email, company, interest, message }) {
-  const stmt = db.prepare(
-    'INSERT INTO contact_messages (user_id, name, email, company, interest, message) VALUES (?, ?, ?, ?, ?, ?)'
-  )
-  const info = stmt.run(userId, name, email, company, interest, message)
-  return getContactMessageById(info.lastInsertRowid)
+async function getTotalUserCount() {
+  return User.countDocuments()
 }
 
-function getContactMessageById(id) {
-  const stmt = db.prepare(
-    'SELECT id, user_id, name, email, company, interest, message, created_at FROM contact_messages WHERE id = ?'
-  )
-  return stmt.get(id)
+async function deleteUser(id) {
+  if (!mongoose.isValidObjectId(id)) return null
+
+  return User.deleteOne({ _id: id })
 }
 
-function getAllContactMessages() {
-  const stmt = db.prepare(
-    'SELECT id, user_id, name, email, company, interest, message, created_at FROM contact_messages ORDER BY created_at DESC'
-  )
-  return stmt.all()
+// CONTACT MESSAGE FUNCTIONS
+
+async function createContactMessage({
+  userId,
+  name,
+  email,
+  company,
+  interest,
+  message
+}) {
+  const contact = await ContactMessage.create({
+    user_id: userId || null,
+    name,
+    email,
+    company,
+    interest,
+    message
+  })
+
+  return formatMessage(contact)
 }
 
-function getContactMessageCount() {
-  const stmt = db.prepare('SELECT COUNT(*) as count FROM contact_messages')
-  return stmt.get().count
+async function getContactMessageById(id) {
+  if (!mongoose.isValidObjectId(id)) return null
+
+  const contact = await ContactMessage.findById(id)
+  return formatMessage(contact)
 }
 
-function deleteContactMessage(id) {
-  const stmt = db.prepare('DELETE FROM contact_messages WHERE id = ?')
-  return stmt.run(id)
+async function getAllContactMessages() {
+  const messages = await ContactMessage.find()
+    .sort({ created_at: -1 })
+
+  return messages.map(formatMessage)
+}
+
+async function getContactMessageCount() {
+  return ContactMessage.countDocuments()
+}
+
+async function deleteContactMessage(id) {
+  if (!mongoose.isValidObjectId(id)) return null
+
+  return ContactMessage.deleteOne({ _id: id })
 }
 
 module.exports = {
-  db,
   createUser,
   getUserByEmail,
   getUserById,
@@ -107,7 +136,8 @@ module.exports = {
   getTotalUserCount,
   deleteUser,
   createContactMessage,
+  getContactMessageById,
   getAllContactMessages,
   getContactMessageCount,
-  deleteContactMessage,
+  deleteContactMessage
 }

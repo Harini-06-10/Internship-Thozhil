@@ -10,13 +10,14 @@
     "build": "node -e \"console.log('No build step required')\""
   },
   "engines": {
-    "node": "26.x"
+    "node": "22.x"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "better-sqlite3": "^12.11.1",
+    "connect-mongo": "^6.0.0",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
-    "express-session": "^1.18.0"
+    "express-session": "^1.18.0",
+    "mongoose": "^9.12.1"
   }
 }

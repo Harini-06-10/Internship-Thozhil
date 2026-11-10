@@ -1,24 +1,33 @@
-// routes/admin.js
+
 const express = require('express')
 const requireAdmin = require('../middleware/requireAdmin')
-const { getAllUsers, getTotalUserCount, deleteUser, getAllContactMessages, getContactMessageCount } = require('../db/database')
+
+const {
+  getAllUsers,
+  getTotalUserCount,
+  deleteUser,
+  getAllContactMessages,
+  getContactMessageCount
+} = require('../db/database')
 
 const router = express.Router()
 
-// ============================================================
-// ADMIN CREDENTIALS — change these before presenting/deploying
-// In a real app these would be in a .env environment variable
-// ============================================================
-const ADMIN_EMAIL    = 'admin@idthirdeye.com'
-const ADMIN_PASSWORD = 'Admin@1234'
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || ''
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || ''
 
-// ---------- GET /admin/login ----------
+// GET admin login
 router.get('/admin/login', (req, res) => {
-  if (req.session.isAdmin) return res.redirect('/admin/dashboard')
-  res.render('admin-login', { error: null, oldInput: {} })
+  if (req.session.isAdmin) {
+    return res.redirect('/admin/dashboard')
+  }
+
+  res.render('admin-login', {
+    error: null,
+    oldInput: {}
+  })
 })
 
-// ---------- POST /admin/login ----------
+// POST admin login
 router.post('/admin/login', (req, res) => {
   const { email, password } = req.body
   const oldInput = { email }
@@ -26,59 +35,74 @@ router.post('/admin/login', (req, res) => {
   if (!email || !password) {
     return res.render('admin-login', {
       error: 'Enter admin email and password.',
-      oldInput,
+      oldInput
     })
   }
 
-  // Simple credential check — no bcrypt needed since these are
-  // hardcoded admin credentials, not user-submitted passwords
   if (
-    email.toLowerCase().trim() !== ADMIN_EMAIL ||
+    !ADMIN_EMAIL ||
+    !ADMIN_PASSWORD ||
+    email.toLowerCase().trim() !== ADMIN_EMAIL.toLowerCase().trim() ||
     password !== ADMIN_PASSWORD
   ) {
     return res.render('admin-login', {
       error: 'Invalid admin credentials.',
-      oldInput,
+      oldInput
     })
   }
 
   req.session.isAdmin = true
 
-  const redirectTo = req.session.adminRedirectTo || '/admin/dashboard'
+  const redirectTo =
+    req.session.adminRedirectTo || '/admin/dashboard'
+
   delete req.session.adminRedirectTo
+
   return res.redirect(redirectTo)
 })
 
-// ---------- GET /admin/dashboard ----------
-router.get('/admin/dashboard', requireAdmin, (req, res) => {
-  const users = getAllUsers()
-  const totalCount = getTotalUserCount()
-  const messages = getAllContactMessages()
-  const messageCount = getContactMessageCount()
-  res.render('admin-dashboard', {
-    users,
-    totalCount,
-    messages,
-    messageCount,
-    adminEmail: ADMIN_EMAIL,
-    success: req.query.deleted ? 'User deleted successfully.' : null,
-  })
-})
+// GET admin dashboard
+router.get('/admin/dashboard', requireAdmin, async (req, res) => {
+  try {
+    const [users, totalCount, messages, messageCount] =
+      await Promise.all([
+        getAllUsers(),
+        getTotalUserCount(),
+        getAllContactMessages(),
+        getContactMessageCount()
+      ])
 
-// ---------- POST /admin/delete/:id ----------
-router.post('/admin/delete/:id', requireAdmin, (req, res) => {
-  const id = parseInt(req.params.id)
-  if (!isNaN(id)) {
-    deleteUser(id)
+    res.render('admin-dashboard', {
+      users,
+      totalCount,
+      messages,
+      messageCount,
+      adminEmail: ADMIN_EMAIL,
+      success: req.query.deleted
+        ? 'User deleted successfully.'
+        : null
+    })
+  } catch (err) {
+    console.error('Admin dashboard error:', err)
+    res.status(500).send('Unable to load admin dashboard.')
   }
-  res.redirect('/admin/dashboard?deleted=1')
 })
 
-// ---------- POST /admin/logout ----------
+// POST delete user
+router.post('/admin/delete/:id', requireAdmin, async (req, res) => {
+  try {
+    await deleteUser(req.params.id)
+    return res.redirect('/admin/dashboard?deleted=1')
+  } catch (err) {
+    console.error('Delete user error:', err)
+    return res.status(500).send('Unable to delete user.')
+  }
+})
+
+// POST admin logout
 router.post('/admin/logout', (req, res) => {
-  req.session.isAdmin = false
   delete req.session.isAdmin
-  res.redirect('/admin/login')
+  return res.redirect('/admin/login')
 })
 
 module.exports = router
