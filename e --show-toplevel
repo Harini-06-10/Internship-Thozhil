@@ -1,0 +1,24 @@
+[35midthirdeye-with-admin/public/css/admin.css[m[36m:[m[32m69[m[36m:[m  gap: [1;31m18px[m;
+[35midthirdeye-with-admin/public/css/idthirdeye.css[m[36m:[m[32m57[m[36m:[m  margin-bottom: [1;31m18px[m;
+[35midthirdeye-with-admin/public/css/idthirdeye.css[m[36m:[m[32m108[m[36m:[m.nav-wrap { max-width: var(--max-w); margin: 0 auto; display: flex; align-items: center; gap: 24px; padding: [1;31m18px[m 24px; }
+[35midthirdeye-with-admin/public/css/idthirdeye.css[m[36m:[m[32m172[m[36m:[m.service-card p { color: var(--steel); font-size: 0.96rem; margin-bottom: [1;31m18px[m; }
+[35midthirdeye-with-admin/public/css/idthirdeye.css[m[36m:[m[32m209[m[36m:[m.training-lede { color: var(--steel); max-width: 560px; margin: [1;31m18px[m 0 36px; font-size: 1rem; }
+[35midthirdeye-with-admin/public/css/idthirdeye.css[m[36m:[m[32m226[m[36m:[m  text-align: left; display: flex; flex-direction: column; gap: [1;31m18px[m;
+[35midthirdeye-with-admin/public/css/idthirdeye.css[m[36m:[m[32m229[m[36m:[m.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: [1;31m18px[m; }
+[35midthirdeye-with-admin/public/css/idthirdeye.css[m[36m:[m[32m262[m[36m:[m  .trust-items { gap: [1;31m18px[m; font-size: 0.82rem; }
+[35midthirdeye-with-admin/public/css/styles.css[m[36m:[m[32m88[m[36m:[m  margin-bottom: [1;31m18px[m;
+[35midthirdeye-with-admin/public/css/styles.css[m[36m:[m[32m160[m[36m:[m  padding: [1;31m18px[m 0;
+[35midthirdeye-with-admin/public/css/styles.css[m[36m:[m[32m192[m[36m:[m  padding: 8px [1;31m18px[m;
+[35midthirdeye-with-admin/public/css/styles.css[m[36m:[m[32m231[m[36m:[m  gap: [1;31m18px[m;
+[35mpublic/css/admin.css[m[36m:[m[32m69[m[36m:[m  gap: [1;31m18px[m;
+[35mpublic/css/idthirdeye.css[m[36m:[m[32m57[m[36m:[m  margin-bottom: [1;31m18px[m;
+[35mpublic/css/idthirdeye.css[m[36m:[m[32m108[m[36m:[m.nav-wrap { max-width: var(--max-w); margin: 0 auto; display: flex; align-items: center; gap: 24px; padding: [1;31m18px[m 24px; }
+[35mpublic/css/idthirdeye.css[m[36m:[m[32m172[m[36m:[m.service-card p { color: var(--steel); font-size: 0.96rem; margin-bottom: [1;31m18px[m; }
+[35mpublic/css/idthirdeye.css[m[36m:[m[32m209[m[36m:[m.training-lede { color: var(--steel); max-width: 560px; margin: [1;31m18px[m 0 36px; font-size: 1rem; }
+[35mpublic/css/idthirdeye.css[m[36m:[m[32m226[m[36m:[m  text-align: left; display: flex; flex-direction: column; gap: [1;31m18px[m;
+[35mpublic/css/idthirdeye.css[m[36m:[m[32m229[m[36m:[m.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: [1;31m18px[m; }
+[35mpublic/css/idthirdeye.css[m[36m:[m[32m262[m[36m:[m  .trust-items { gap: [1;31m18px[m; font-size: 0.82rem; }
+[35mpublic/css/styles.css[m[36m:[m[32m88[m[36m:[m  margin-bottom: [1;31m18px[m;
+[35mpublic/css/styles.css[m[36m:[m[32m160[m[36m:[m  padding: [1;31m18px[m 0;
+[35mpublic/css/styles.css[m[36m:[m[32m192[m[36m:[m  padding: 8px [1;31m18px[m;
+[35mpublic/css/styles.css[m[36m:[m[32m231[m[36m:[m  gap: [1;31m18px[m;
